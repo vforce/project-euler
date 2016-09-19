@@ -46,6 +46,8 @@ def get_word(n)
   end
 end
 
+sum_size = 0
 (1..1000).each do |n|
-  puts get_word(n)
+  sum_size += get_word(n).gsub(' ', '').size
 end
+puts sum_size
