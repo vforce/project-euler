@@ -1,18 +1,17 @@
-n = 10000
+n = 1000000
 a = Array.new(n+1, 1)
 (2..n/2).each do |i|
-  (i*2..n).each do |j|
-    if j%i==0
-      a[j] = a[j] + i
-    end
+  (2..n/i).each do |j|
+    a[j*i] = a[j*i] + i
   end
 end
 num_count = 0
+seen = {}
 (2..n).each do |k|
-  x = a[k]
-  y = a[x]
-  if x==y and k!=x
-    num_count += (x+y)
+  if k==a[a[k]] and k!=a[k] and seen[k].nil?
+    puts "#{k}, #{a[k]}"
+    seen[k] = seen[a[k]] = true
+    num_count += (k+a[k])
   end
 end
 
