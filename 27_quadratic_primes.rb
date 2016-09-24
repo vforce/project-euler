@@ -14,9 +14,11 @@ $primes = Array.new($sieve_bound, true)
   end
 end
 
-primes = {}
+primes = []
+$is_prime = {}
 $primes.each_index.select{|i| $primes[i]}.map{|i| 2*i+1}.each do |p|
-  primes[p] = 1
+  primes << p
+  $is_prime[p] = 1
 end
 
 def get_chain_length(a, b)
@@ -28,32 +30,38 @@ def get_chain_length(a, b)
     if s<2
       return [chain_length, result]
     end
-    if primes[n*n+n*a+b]==1
+    if $is_prime[n*n+n*a+b]==1
       chain_length += 1
     else
       break
     end
   end
-  [chain_length, result]
+  [chain_length, a*b]
 end
 
 result = 0
 max_chain_length = 0
-primes.each do |b|
+primes.each_with_index do |b|
   if b<3
     next
   end
+  if b>1000
+    break
+  end
   (-1000..1000).each do |a|
     (chain_length, product) = get_chain_length(a, b)
+    #puts "#{b} #{a} #{chain_length} #{product}"
+
     if max_chain_length < chain_length 
       max_chain_length = chain_length
       result = product
     end
     (chain_length, product) = get_chain_length(a, -b)
+    #puts "#{b}, #{chain_length} #{product}"
     if max_chain_length < chain_length 
       max_chain_length = chain_length
       result = product
     end
   end
 end
-puts product
+puts result
