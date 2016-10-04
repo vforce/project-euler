@@ -11,9 +11,9 @@ puts s.size
 
 count = 0
 (2..n).each do |a|
-  seen[a][0] = seen[a][1] = 0
+  seen[a][0] = seen[a][1] = a
   count += seen[a].inject(0) {|memo, x| memo+x}
-  if a<Math.sqrt(n)
+  if a<=Math.sqrt(n)
     (2..Math.log(n, a).floor).each do |k|
       (2..n/k).each do |l|
         puts "#{a}, #{k}, #{a**k} #{l}"
@@ -24,6 +24,13 @@ count = 0
 end
 
 pp seen
+
+# 4^6 = 8^4
+# or 2^(2*3) = 2^(2*3)
+# when a = 2
+# k = 2, then takes for 4, max power is 2^10. but it can go beyond that, because 2^x where x>10 can represent other power. then the question is, how big can l go 
+# how to take 8^4? 8^4 = 2^6
+# a = 2, k = 3, then how big is l? (2..10/3)
 
 puts count
 # 2**4 = 4**2
