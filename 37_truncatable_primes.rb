@@ -12,6 +12,7 @@ sieve = Array.new(sieve_bound, true)
   end
 end
 
+
 primes = {2 => true}
 sieve.each_with_index do |v, i|
   if v and i>0
