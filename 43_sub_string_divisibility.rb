@@ -2,14 +2,11 @@ $sum = 0
 $primes = [2,3,5,7,11,13,17]
 def gen(n, seen, a)
   if n==10
-    (1..7).each do |i|
-      x = a.to_s.chars.slice(i, 3).join.to_i
-      y = $primes[i-1]
-      return if x%y!=0
+    if (a%1000 % 17)==0
+      $sum += a
     end
-    $sum += a
   else
-    if n<=3 || (n>3 && a % $primes[n-3]==0)
+    if n<=3 || (n>3 && ((a%1000) % $primes[n-4])==0)
       if n==0
         digits = (1..9)
       else
