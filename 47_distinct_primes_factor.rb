@@ -42,13 +42,6 @@ def prime_factor(n)
   end
 end
 
-$factor_count = Hash.new(0)
-def get_factor_count(n)
-  return $factor_count[n] if $factor_count[n]>0
-  return $factor_count[n] = prime_factor(n)
-end
-
-
 n = 1
 while true
   n += 1
