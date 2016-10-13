@@ -22,19 +22,24 @@ sieve.each_with_index do |v, i|
   end
 end
 
+$factors = Hash.new {|hash, key| hash[key] = Hash.new(0)}
+$factors[1] = 1
+
 def prime_factor(n)
-  factor_count = 0
   limit = n/2
+  m = n
   $primes.each do |k|
     break if k>limit
-    if n%k==0
-      factor_count += 1
-      while n%k==0
-        n /= k
+    if m%k==0
+      $factors[m].merge!($factors[m/k])
+      if $factors[m/k][k].nil?
+        $factors[m][k] = 1
+      else
+        $factors[m][k] += 1
       end
+      return $factors[m].size
     end
   end
-  factor_count
 end
 
 $factor_count = Hash.new(0)
@@ -44,14 +49,17 @@ def get_factor_count(n)
 end
 
 
-n = 209
+n = 1
 while true
   n += 1
-  next if is_primes[n]
-  if get_factor_count(n) == 4 &&
-    get_factor_count(n+1) == 4 && 
-    get_factor_count(n+2) ==4 && 
-    get_factor_count(n+3) == 4
+  if is_primes[n]
+    $factors[n] = {n => 1}
+    next
+  end
+  if prime_factor(n) == 4 &&
+    prime_factor(n+1) == 4 && 
+    prime_factor(n+2) ==4 && 
+    prime_factor(n+3) == 4
     puts n
     exit
   end
