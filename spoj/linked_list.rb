@@ -63,7 +63,7 @@ class Node
     return head_less
   end
 
-  def reverse
+  def reverse!
     node = nex = self
     prev = nil
     while node!=nil
@@ -78,7 +78,24 @@ class Node
   end
 
   def reverse_sum(other)
-    (self.reverse + other.reverse).reverse
+    (self.reverse! + other.reverse!).reverse!
+  end
+
+  def is_parlindrome
+    self.to_s == self.reverse!.to_s
+  end
+
+  def detect_circle
+    seen = {}
+    node = self
+    while node!= nil
+      if seen[node.object_id] !=nil
+        return node
+      else
+        seen[node.object_id] = true
+      end
+      node = node.next
+    end
   end
 
 

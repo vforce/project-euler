@@ -73,30 +73,38 @@ describe 'linked list should work correctly' do
     expect(node.size).to eq(4)
   end
 
-  it 'should partition correctly' do
-    expect(from_str('3 5 2 1 6').partition(4).to_s).to eq('3 2 1 5 6')
+  describe 'it should do partition correctly' do
+    it 'should partition correctly' do
+      expect(from_str('3 5 2 1 6').partition(4).to_s).to eq('3 2 1 5 6')
+    end
+
+    it 'should partition! correctly' do
+      expect(Node.new(1).partition!(4).to_s).to eq('1')
+      expect(from_str('3 5 2 1 6').partition!(4).to_s).to eq('3 2 1 5 6')
+    end
   end
 
-  it 'should partition! correctly' do
-    expect(Node.new(1).partition!(4).to_s).to eq('1')
-    expect(from_str('3 5 2 1 6').partition!(4).to_s).to eq('3 2 1 5 6')
+  describe 'it should do sum correctly' do
+    it 'should do sum in normal order correctly' do
+      expect(from_str('6 1 7').reverse_sum(from_str('2 9 5')).to_s).to \
+        eq('9 1 2')
+      expect(from_str('1 1').reverse_sum(from_str('9 9 9')).to_s).to \
+        eq('1 0 1 0')
+    end
+
+    it 'should do sum correctly when saved in reversed order' do
+      expect(sum_str('7 1 6', '5 9 2').to_s).to eq('2 1 9')
+      expect(sum_str('1 1', '9 9 9').to_s).to eq('0 1 0 1')
+      expect(sum_str('0', '9 9 9').to_s).to eq('9 9 9')
+    end
   end
 
   it 'should reverse correctly' do
-    expect(from_str('1 2 3').reverse.to_s).to eq('3 2 1')
+    expect(from_str('1 2 3').reverse!.to_s).to eq('3 2 1')
   end
 
-  it 'should do sum in normal order correctly' do
-    expect(from_str('6 1 7').reverse_sum(from_str('2 9 5')).to_s).to \
-      eq('9 1 2')
-    expect(from_str('1 1').reverse_sum(from_str('9 9 9')).to_s).to \
-      eq('1 0 1 0')
-  end
-
-  it 'should do sum correctly when saved in reversed order' do
-    expect(sum_str('7 1 6', '5 9 2').to_s).to eq('2 1 9')
-    expect(sum_str('1 1', '9 9 9').to_s).to eq('0 1 0 1')
-    expect(sum_str('0', '9 9 9').to_s).to eq('9 9 9')
+  it 'shoud check for palindrome correctly' do
+    expect(from_str('1 2 3 2 1').is_parlindrome).to be(true)
   end
 
   it 'should append correctly' do
@@ -122,5 +130,23 @@ describe 'linked list should work correctly' do
       expect(node.next.data).to be(3)
       expect(node.next.next).to be(nil)
     end
+  end
+
+  it 'should detect circular correctly' do
+    node = Node.new(0)
+    a = Node.new(1)
+    b = Node.new(2)
+    c = Node.new(3)
+    node.next = a
+    a.next = b
+    b.next = c
+    c.next = a
+    expect(a.detect_circle).to be(a)
+
+    a = Node.new(1)
+    b = Node.new(2)
+    a.next = b
+    b.next = a
+    expect(a.detect_circle).to be(a)
   end
 end
