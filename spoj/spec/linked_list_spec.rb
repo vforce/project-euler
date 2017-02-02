@@ -1,4 +1,4 @@
-require './linked_list'
+require 'linked_list'
 
 describe 'linked list should work correctly' do
   def node

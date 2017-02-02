@@ -1,4 +1,4 @@
-require './queue'
+require 'queue'
 
 describe 'queue' do
   def queue

@@ -1,4 +1,4 @@
-require './one_array_three_stacks'
+require 'one_array_three_stacks'
 
 describe 'should work with 3 stacks on 1 array' do
   def stack

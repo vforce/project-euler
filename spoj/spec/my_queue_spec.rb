@@ -1,4 +1,4 @@
-require './my_queue'
+require 'my_queue'
 
 describe 'my queue' do
   describe 'should work correctly' do

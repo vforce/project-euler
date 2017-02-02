@@ -1,4 +1,5 @@
-require './linked_list'
+require 'linked_list'
+
 class Queue
   def initialize
     @node = nil

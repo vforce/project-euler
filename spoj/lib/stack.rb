@@ -1,4 +1,4 @@
-require './linked_list'
+require 'linked_list'
 
 class Stack
   def initialize

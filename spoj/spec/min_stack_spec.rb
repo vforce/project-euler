@@ -1,4 +1,4 @@
-require './min_stack'
+require 'min_stack'
 
 describe 'test min stack' do
   def stack

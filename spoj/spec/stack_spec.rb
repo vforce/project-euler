@@ -1,4 +1,4 @@
-require './stack'
+require 'stack'
 
 describe 'stack' do
   def stack
